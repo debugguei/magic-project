@@ -1,12 +1,12 @@
 [← Voltar para a seleção de idioma](./README.md)
 
-# Booksheelf Social Network
+# MTG Collection Social Network
 
 ### Sobre o Projeto
-Uma rede social orientada a eventos para leitores. Os usuários podem identificar e adicionar livros às suas estantes digitais simplesmente tirando uma foto da capa. O sistema processa a imagem usando Visão Computacional e Large Language Models (LLMs) para extrair automaticamente dados estruturados (Título, Autor, Editora).
+Uma rede social orientada a eventos para jogadores e colecionadores de Magic: The Gathering. Os usuários adicionam cartas às suas coleções digitais tirando uma foto da carta. O sistema processa a imagem com Visão Computacional e Large Language Models (LLMs) e extrai dados estruturados: Nome da carta, Edição (set), Número de colecionador, Custo de mana, Tipo e Raridade.
 
 ### Arquitetura e Tecnologias
-Este projeto utiliza uma arquitetura distribuída baseada no ecossistema AWS, executando nativamente no Windows sem uso de Docker:
+Arquitetura distribuída baseada no ecossistema AWS, executando nativamente no Windows, sem uso de Docker:
 * **Frontend:** Ionic / Angular (App Mobile)
 * **Armazenamento e Filas:** AWS S3 (armazenamento de imagens) e AWS SQS (mensageria)
 * **Visão Computacional e IA:** AWS Rekognition (OCR) e Llama 3 via Amazon Bedrock (LLM)
@@ -17,7 +17,7 @@ Este projeto utiliza uma arquitetura distribuída baseada no ecossistema AWS, ex
 Este é um monorepo que contém três repositórios filhos independentes (Git Submodules). Abaixo está a macroestrutura do ecossistema:
 
 ```text
-/bookshelf-project
+/mtg-collection-project
 │
 ├── prjDevMob/                      # Repositório do App Mobile
 │   ├── src/app/                    # Páginas, Serviços globais e Componentes
@@ -26,7 +26,7 @@ Este é um monorepo que contém três repositórios filhos independentes (Git Su
 │   └── package.json                # Dependências do Node
 │
 ├── repo-processamento-imagem/      # Repositório de Visão Computacional e IA
-│   ├── src/pre_processamento/      # Ajustes de imagem (contraste/filtros) antes do OCR
+│   ├── src/pre_processamento/      # Ajustes de imagem (contraste, brilho, reflexo de foil) antes do OCR
 │   ├── src/ocr/                    # Integração com AWS Rekognition
 │   ├── src/ia_parser/              # Estruturação do JSON final com Amazon Bedrock (LLM)
 │   ├── utils/                      # Scripts de métricas de tempo e precisão
@@ -38,3 +38,4 @@ Este é um monorepo que contém três repositórios filhos independentes (Git Su
     ├── src/orquestrador/           # Orquestrador do fluxo (Baixa Imagem -> Aciona LLM -> Salva no BD)
     ├── .env                        # Variáveis de ambiente locais
     └── Makefile                    # Regras de compilação C++ via MinGW no Windows
+```
